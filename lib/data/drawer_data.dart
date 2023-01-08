@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/utils/app_routes.dart';
 
 enum DrawerItems {
+  item6(
+    title: 'Home',
+    icon: Icons.home,
+    routeToNavigate: AppRoutes.HOMEPAGE,
+  ),
+
   item1(
     title: 'Criar voo',
     icon: Icons.airplanemode_on,
-    routeToNavigate: AppRoutes.HOMEPAGE,
+    routeToNavigate: AppRoutes.CREATE_FLIGHT,
   ),
 
   item2(

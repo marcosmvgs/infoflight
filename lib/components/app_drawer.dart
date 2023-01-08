@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/data/drawer_data.dart';
-import 'package:infoflight/utils/app_routes.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -29,12 +28,9 @@ class AppDrawer extends StatelessWidget {
                       leading: Icon(DrawerItems.values[index].icon),
                       title: Text(DrawerItems.values[index].title),
                       onTap: () {
-                        if (DrawerItems.values[index].routeToNavigate == '/') {
-                          return Navigator.of(context).pop();
-                        } else {
+
                           Navigator.of(context)
                               .pushNamed(DrawerItems.values[index].routeToNavigate);
-                        }
                       },
                     ),
                     const Divider(thickness: 1.2,),
