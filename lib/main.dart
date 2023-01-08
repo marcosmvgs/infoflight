@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/screens/airfield_info_screen.dart';
 import 'package:infoflight/screens/create_flight_screen.dart';
 import 'package:infoflight/screens/homepage_sceen.dart';
 import 'package:infoflight/screens/profile_seetings_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOMEPAGE: (context) => const HomepageScreen(),
         AppRoutes.CREATE_FLIGHT: (context) => const CreateFlightScreen(),
         AppRoutes.PROFILE_SETTINGS: (context) => const ProfileSettingsScreen(),
+        AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInfoScreen(),
       },
     );
   }

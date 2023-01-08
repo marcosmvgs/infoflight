@@ -4,4 +4,5 @@ class AppRoutes {
   static const String HOMEPAGE = '/';
   static const String CREATE_FLIGHT = '/create-form';
   static const String PROFILE_SETTINGS = '/profile-settings';
+  static const String AIRFIELD_INFO = '/airfield-info';
 }

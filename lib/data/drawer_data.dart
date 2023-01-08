@@ -21,7 +21,7 @@ enum DrawerItems {
     position: 3,
     title: 'Informações de Aeródromo',
     icon: Icons.cloud,
-    routeToNavigate: AppRoutes.HOMEPAGE,
+    routeToNavigate: AppRoutes.AIRFIELD_INFO,
   ),
 
   noticiasAviacao(
