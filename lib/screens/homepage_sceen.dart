@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/components/app_drawer.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
@@ -9,7 +10,9 @@ class HomepageScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('InfoFlight'),
       ),
-      body: const Center(child: Text('Home Page do Aplicativo'),),
+      body: Center(child: Text('Home Page do Aplicativo',
+      style: Theme.of(context).textTheme.headline4,),),
+      drawer: AppDrawer(),
     );
   }
 }
