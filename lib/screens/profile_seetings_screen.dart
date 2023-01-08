@@ -28,9 +28,14 @@ class ProfileSettingsScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Container(
             alignment: Alignment.center,
-            child: const CircleAvatar(
+            child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
               radius: 50,
-              child: Icon(Icons.person, size: 60),
+              child: Icon(
+                Icons.person,
+                size: 60,
+                color: Theme.of(context).scaffoldBackgroundColor,
+              ),
             ),
           ),
           const SizedBox(height: 30),

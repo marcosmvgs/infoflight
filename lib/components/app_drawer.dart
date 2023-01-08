@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/data/drawer_data.dart';
 
-
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
@@ -22,18 +21,24 @@ class AppDrawer extends StatelessWidget {
               shrinkWrap: true,
               itemCount: DrawerItems.values.length,
               itemBuilder: (context, index) {
+                
+                final item = DrawerItems.values.where((element) {
+                  return element.position == index + 1;
+                }).toList()[0];
+
                 return Column(
                   children: [
                     ListTile(
-                      leading: Icon(DrawerItems.values[index].icon),
-                      title: Text(DrawerItems.values[index].title),
+                      leading: Icon(item.icon),
+                      title: Text(item.title),
                       onTap: () {
-
-                          Navigator.of(context)
-                              .pushNamed(DrawerItems.values[index].routeToNavigate);
+                        Navigator.of(context).pushNamed(
+                            item.routeToNavigate);
                       },
                     ),
-                    const Divider(thickness: 1.2,),
+                    const Divider(
+                      thickness: 1.2,
+                    ),
                   ],
                 );
               }),
