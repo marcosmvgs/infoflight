@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.HOMEPAGE: (context) => const HomepageScreen(),
         AppRoutes.CREATE_FLIGHT: (context) => const CreateFlightScreen(),
         AppRoutes.PROFILE_SETTINGS: (context) => const ProfileSettingsScreen(),
-        AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInfoScreen(),
+        AppRoutes.AIRFIELD_INFO: (context) => const TestScreen(),
       },
     );
   }
