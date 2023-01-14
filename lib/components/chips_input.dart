@@ -76,10 +76,11 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
       },
       chipBuilder: (context, state, Airfield profile) {
         return InputChip(
-          deleteIcon: const CircleAvatar(
-            backgroundColor: Colors.orange,
+          deleteIcon: CircleAvatar(
+            backgroundColor: profile.color == null ? null
+          : status(profile.color!),
             radius: 10,
-            child: Icon(
+            child: const Icon(
               Icons.close,
               size: 15,
               color: Colors.black,
@@ -97,7 +98,9 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
           title: Text(profile.icao),
           subtitle: Text(profile.city),
           onTap: () => state.selectSuggestion(profile),
-          trailing: CircleAvatar(backgroundColor: profile.color == null ? null
+          trailing: CircleAvatar(
+            radius: 10,
+            backgroundColor: profile.color == null ? null
           : status(profile.color!),
         ));
       },
