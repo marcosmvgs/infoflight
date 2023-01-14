@@ -4,6 +4,30 @@ import 'package:infoflight/models/airfield.dart';
 import 'package:infoflight/models/selected_airfields_list.dart';
 import 'package:provider/provider.dart';
 
+enum StatusColor {
+  g(cor: Colors.green, label: 'g'),
+  cinza(cor: Colors.grey, label: 'cinza'),
+  y(cor: Colors.yellow, label: 'y'),
+  r(cor: Colors.red, label: 'r');
+
+  const StatusColor({
+    required this.cor,
+    required this.label,
+  });
+
+  final Color cor;
+  final String label;
+}
+
+Color status(String label) {
+  Color color = Colors.purple;
+  if(label == 'r') color = Colors.red;
+  if(label == 'g') color = Colors.green;
+  if(label == 'y') color = Colors.yellow;
+  return color;
+
+}
+
 class ChipsInputWidget extends StatefulWidget {
   const ChipsInputWidget({
     Key? key,
@@ -73,7 +97,9 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
           title: Text(profile.icao),
           subtitle: Text(profile.city),
           onTap: () => state.selectSuggestion(profile),
-        );
+          trailing: CircleAvatar(backgroundColor: profile.color == null ? null
+          : status(profile.color!),
+        ));
       },
     );
   }

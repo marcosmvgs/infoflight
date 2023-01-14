@@ -1,9 +1,11 @@
 class Airfield {
   final String icao;
   final String city;
+  String? color;
 
-  const Airfield({
+  Airfield({
     required this.icao,
     required this.city,
+    this.color,
   });
 }

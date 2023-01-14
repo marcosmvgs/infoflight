@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/models/airfields_list.dart';
 import 'package:infoflight/models/selected_airfields_list.dart';
 import 'package:infoflight/models/selected_products_list.dart';
 import 'package:infoflight/screens/airfield_info_screen.dart';
@@ -21,8 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SelectedAirfieldsList(),),
-        ChangeNotifierProvider(create: (_) => SelectedProductsList(),),
+        ChangeNotifierProvider(
+          create: (_) => SelectedAirfieldsList(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SelectedProductsList(),
+        ),
+        ChangeNotifierProvider(create: (_) => AirfieldsList()),
       ],
       child: MaterialApp(
         title: 'InfoFlight',
@@ -62,7 +68,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.CREATE_FLIGHT: (context) => const CreateFlightScreen(),
           AppRoutes.PROFILE_SETTINGS: (context) =>
               const ProfileSettingsScreen(),
-          AppRoutes.AIRFIELD_INFO: (context) => const TestScreen(),
+          AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInforScreen(),
         },
       ),
     );

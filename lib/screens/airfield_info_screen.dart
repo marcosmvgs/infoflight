@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/chips_input.dart';
 import 'package:infoflight/components/product_item.dart';
 import 'package:infoflight/data/products_data.dart';
-import 'package:infoflight/models/airfield.dart';
+import 'package:infoflight/models/airfields_list.dart';
 import 'package:infoflight/models/selected_airfields_list.dart';
 import 'package:infoflight/models/selected_products_list.dart';
 import 'package:provider/provider.dart';
 
-class TestScreen extends StatefulWidget {
-  const TestScreen({super.key});
+class AirfieldInforScreen extends StatefulWidget {
+  const AirfieldInforScreen({super.key});
 
   @override
-  State<TestScreen> createState() => _TestScreenState();
+  State<AirfieldInforScreen> createState() => _AirfieldInforScreenState();
 }
 
-class _TestScreenState extends State<TestScreen> {
+class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
   bool _isSearching = false;
 
   @override
@@ -27,24 +27,7 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const mockResults = <Airfield>[
-      Airfield(
-        icao: 'SBGR',
-        city: 'Guarulhos-SP',
-      ),
-      Airfield(
-        icao: 'SBVC',
-        city: 'Campinas-SP',
-      ),
-      Airfield(
-        icao: 'SBBV',
-        city: 'Boa Vista-RR',
-      ),
-      Airfield(
-        icao: 'SBCC',
-        city: 'Alta FLoresta-PA',
-      ),
-    ];
+    final airfieldsList = Provider.of<AirfieldsList>(context).airfields;
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +36,7 @@ class _TestScreenState extends State<TestScreen> {
                 'Selecione os produtos e clique para pesquisar...',
                 style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
               )
-            : const ChipsInputWidget(mockResults: mockResults),
+            : ChipsInputWidget(mockResults: airfieldsList),
         automaticallyImplyLeading: _isSearching ? false : true,
         actions: _isSearching
             ? [
@@ -105,13 +88,12 @@ class _TestScreenState extends State<TestScreen> {
                       },
                     )),
           ),
-          Text(
-            Provider.of<SelectedProductsList>(context)
-                .selectedProductsList
-                .toString(),
-            style: const TextStyle(
-              color: Colors.white,
-            ),
+          TextButton(
+            onPressed: () {
+              Provider.of<AirfieldsList>(context, listen: false)
+                  .loadAirfieldsColors();
+            },
+            child: const Text('Pegar Info'),
           ),
         ],
       ),
