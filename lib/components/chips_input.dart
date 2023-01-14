@@ -4,28 +4,23 @@ import 'package:infoflight/models/airfield.dart';
 import 'package:infoflight/models/selected_airfields_list.dart';
 import 'package:provider/provider.dart';
 
-enum StatusColor {
-  g(cor: Colors.green, label: 'g'),
-  cinza(cor: Colors.grey, label: 'cinza'),
-  y(cor: Colors.yellow, label: 'y'),
-  r(cor: Colors.red, label: 'r');
+Widget inputCircleColor(String? label) {
+  const List<Map<String, Color>> matchColors = [
+    {'y': Colors.yellow},
+    {'g': Colors.green},
+    {'r': Colors.red},
+    {'gw': Colors.green},
+    {'cinza': Colors.grey}
+  ];
 
-  const StatusColor({
-    required this.cor,
-    required this.label,
-  });
-
-  final Color cor;
-  final String label;
-}
-
-Color status(String label) {
-  Color color = Colors.purple;
-  if(label == 'r') color = Colors.red;
-  if(label == 'g') color = Colors.green;
-  if(label == 'y') color = Colors.yellow;
-  return color;
-
+  Widget widget = CircleAvatar(
+    radius: 10,
+    backgroundColor: matchColors
+        .firstWhere((element) => element.containsKey(label), orElse: (() => {'NR': const Color.fromRGBO(1, 1, 1, 0.0)}) )
+        .values
+        .first,
+  );
+  return widget;
 }
 
 class ChipsInputWidget extends StatefulWidget {
@@ -77,13 +72,12 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
       chipBuilder: (context, state, Airfield profile) {
         return InputChip(
           deleteIcon: CircleAvatar(
-            backgroundColor: profile.color == null ? null
-          : status(profile.color!),
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             radius: 10,
             child: const Icon(
               Icons.close,
               size: 15,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           key: ObjectKey(profile),
@@ -94,15 +88,11 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
       },
       suggestionBuilder: (context, state, Airfield profile) {
         return ListTile(
-          key: ObjectKey(profile),
-          title: Text(profile.icao),
-          subtitle: Text(profile.city),
-          onTap: () => state.selectSuggestion(profile),
-          trailing: CircleAvatar(
-            radius: 10,
-            backgroundColor: profile.color == null ? null
-          : status(profile.color!),
-        ));
+            key: ObjectKey(profile),
+            title: Text(profile.icao),
+            subtitle: Text(profile.city),
+            onTap: () => state.selectSuggestion(profile),
+            trailing: inputCircleColor(profile.color));
       },
     );
   }

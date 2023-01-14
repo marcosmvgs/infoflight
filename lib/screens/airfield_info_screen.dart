@@ -88,13 +88,6 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       },
                     )),
           ),
-          TextButton(
-            onPressed: () {
-              Provider.of<AirfieldsList>(context, listen: false)
-                  .loadAirfieldsColors();
-            },
-            child: const Text('Pegar Info'),
-          ),
         ],
       ),
     );
