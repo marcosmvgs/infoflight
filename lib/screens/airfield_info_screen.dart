@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/chips_input.dart';
+import 'package:infoflight/components/info_item.dart';
 import 'package:infoflight/components/product_item.dart';
 import 'package:infoflight/data/products_data.dart';
 import 'package:infoflight/models/airfields_list.dart';
@@ -15,6 +16,7 @@ class AirfieldInforScreen extends StatefulWidget {
 }
 
 class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
+  bool _showResults = false;
   bool _isSearching = false;
 
   @override
@@ -27,9 +29,14 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final airfieldsList = Provider.of<AirfieldsList>(context).airfields;
+    final airfieldsList =
+        Provider.of<AirfieldsList>(context, listen: false).airfields;
+    var selectedAirfields =
+        Provider.of<SelectedAirfieldsList>(context, listen: false)
+            .selectedAirfieldsList;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: !_isSearching
             ? const Text(
@@ -68,7 +75,7 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
             margin: const EdgeInsets.symmetric(
               horizontal: 10,
             ),
-            height: 120,
+            height: 90,
             width: double.infinity,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -88,6 +95,38 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       },
                     )),
           ),
+          ElevatedButton(
+            onPressed: () {
+              selectedAirfields = Provider.of<SelectedAirfieldsList>(context, listen: false)
+                  .selectedAirfieldsList;
+              if (selectedAirfields.isEmpty) {
+                return;
+              } else {
+                setState(() {
+                _showResults = true;
+                  
+                });
+              }
+            },
+            child: const Text('Pesquisar'),
+          ),
+          _showResults && selectedAirfields.isNotEmpty
+              ? SizedBox(
+                  height: 500,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: selectedAirfields.length,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                            child:
+                                InfoItem(airfield: selectedAirfields[index]));
+                      }),
+                )
+              : Text(
+                  'Selecione os produtos e aeródromos e clique em Pesquisar...',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline5,
+                )
         ],
       ),
     );

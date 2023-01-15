@@ -28,12 +28,16 @@ class AirfieldsList with ChangeNotifier {
       List<dynamic> data = rawData['data'];
       for (Map<String, dynamic> airfieldItem in data) {
         final airfieldItemColor = airfieldStatus
-            .firstWhere((element) => element
-            .containsKey(airfieldItem['cod'])).values.first;
+            .firstWhere((element) => element.containsKey(airfieldItem['cod']))
+            .values
+            .first;
         _airfields.add(Airfield(
           icao: airfieldItem['cod'],
           city: airfieldItem['cidade'],
-          color: airfieldItemColor,
+          color: airfieldItemColor['cor'],
+          country: airfieldItem['pais'],
+          name: airfieldItem['nome'],
+          metar: airfieldItemColor['METAR/TAF'],
         ));
       }
     } else {
@@ -42,15 +46,18 @@ class AirfieldsList with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<Map<String, String>>> loadAirfieldsColors() async {
-    final List<Map<String, String>> airfieldsColors = [];
+  Future<List<Map<String, dynamic>>> loadAirfieldsColors() async {
+    final List<Map<String, dynamic>> airfieldsColors = [];
     final response = await http.get(Uri.parse(_baseUrlStatus));
     Map<String, dynamic> rawData = jsonDecode(response.body);
     if (rawData['status'] == true) {
       List<dynamic> data = rawData['data'];
       for (var airfieldStatusItem in data) {
         airfieldsColors.add({
-          airfieldStatusItem[0].toString(): airfieldStatusItem[4].toString()
+          airfieldStatusItem[0].toString(): {
+            'cor': airfieldStatusItem[4].toString(),
+            'METAR/TAF': airfieldStatusItem[5],
+          }
         });
       }
     } else {

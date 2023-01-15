@@ -16,7 +16,8 @@ Widget inputCircleColor(String? label) {
   Widget widget = CircleAvatar(
     radius: 10,
     backgroundColor: matchColors
-        .firstWhere((element) => element.containsKey(label), orElse: (() => {'NR': const Color.fromRGBO(1, 1, 1, 0.0)}) )
+        .firstWhere((element) => element.containsKey(label),
+            orElse: (() => {'NR': const Color.fromRGBO(1, 1, 1, 0.0)}))
         .values
         .first,
   );
@@ -50,7 +51,7 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
             fontStyle: FontStyle.italic,
             color: Colors.white,
           )),
-      maxChips: 5,
+      maxChips: 3,
       findSuggestions: (String query) {
         if (query.isNotEmpty) {
           var lowercaseQuery = query.toLowerCase();
@@ -66,7 +67,7 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
         return widget.mockResults;
       },
       onChanged: (data) {
-        Provider.of<SelectedAirfieldsList>(context, listen: false)
+       Provider.of<SelectedAirfieldsList>(context, listen: false)
             .updateSelectedAirfieldList(data);
       },
       chipBuilder: (context, state, Airfield profile) {
@@ -87,12 +88,17 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
         );
       },
       suggestionBuilder: (context, state, Airfield profile) {
-        return ListTile(
-            key: ObjectKey(profile),
-            title: Text(profile.icao),
-            subtitle: Text(profile.city),
-            onTap: () => state.selectSuggestion(profile),
-            trailing: inputCircleColor(profile.color));
+        return Column(
+          children: [
+            ListTile(
+                key: ObjectKey(profile),
+                title: Text(profile.icao),
+                subtitle: Text(profile.city),
+                onTap: () => state.selectSuggestion(profile),
+                trailing: inputCircleColor(profile.color)),
+                const Divider(thickness: 1.3,)
+          ],
+        );
       },
     );
   }

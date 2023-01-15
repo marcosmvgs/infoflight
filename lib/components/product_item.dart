@@ -27,13 +27,13 @@ class _ProductItemState extends State<ProductItem> {
         widget.onSelected(_isSelected);
       }),
       child: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 100),
               curve: Curves.easeIn,
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: _isSelected
@@ -51,7 +51,7 @@ class _ProductItemState extends State<ProductItem> {
             Text(widget.product.label,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 16,
+              fontSize: 12,
               color: Theme.of(context).colorScheme.primaryContainer,
             ),),
           ],

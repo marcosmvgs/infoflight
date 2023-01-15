@@ -17,4 +17,8 @@ class SelectedAirfieldsList with ChangeNotifier {
     _selectedAirfieldsList = [];
     notifyListeners();
   }
+
+  int getLenght() {
+    return _selectedAirfieldsList.length;
+  }
 }
