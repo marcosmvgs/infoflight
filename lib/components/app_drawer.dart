@@ -22,9 +22,9 @@ class AppDrawer extends StatelessWidget {
               itemCount: DrawerItems.values.length,
               itemBuilder: (context, index) {
                 
-                final item = DrawerItems.values.where((element) {
-                  return element.position == index + 1;
-                }).toList()[0];
+                final item = DrawerItems.values.firstWhere((element) {
+                  return element.index == index;
+                });
 
                 return Column(
                   children: [

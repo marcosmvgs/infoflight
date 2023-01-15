@@ -34,6 +34,8 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
     var selectedAirfields =
         Provider.of<SelectedAirfieldsList>(context, listen: false)
             .selectedAirfieldsList;
+    var selectedProductsProvider =
+        Provider.of<SelectedProductsList>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -84,27 +86,25 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       product: Products.values[index],
                       onSelected: (bool value) {
                         if (value) {
-                          Provider.of<SelectedProductsList>(context,
-                                  listen: false)
-                              .addProduct(Products.values[index]);
+                          selectedProductsProvider.addProduct(
+                              Products.values[index]);
                         } else {
-                          Provider.of<SelectedProductsList>(context,
-                                  listen: false)
-                              .removeProduct(Products.values[index]);
+                          selectedProductsProvider.removeProduct(
+                              Products.values[index]);
                         }
                       },
                     )),
           ),
           ElevatedButton(
             onPressed: () {
-              selectedAirfields = Provider.of<SelectedAirfieldsList>(context, listen: false)
-                  .selectedAirfieldsList;
+              selectedAirfields =
+                  Provider.of<SelectedAirfieldsList>(context, listen: false)
+                      .selectedAirfieldsList;
               if (selectedAirfields.isEmpty) {
                 return;
               } else {
                 setState(() {
-                _showResults = true;
-                  
+                  _showResults = true;
                 });
               }
             },
@@ -122,11 +122,15 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                                 InfoItem(airfield: selectedAirfields[index]));
                       }),
                 )
-              : Text(
-                  'Selecione os produtos e aeródromos e clique em Pesquisar...',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline5,
-                )
+              : Expanded(
+                child: Center(
+                  child: Text(
+                      'Selecione os produtos e aeródromos e clique em Pesquisar...',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                ),
+              )
         ],
       ),
     );

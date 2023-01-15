@@ -3,15 +3,13 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:infoflight/models/airfield.dart';
 import 'package:http/http.dart' as http;
+import 'package:infoflight/utils/constants.dart';
 
 class AirfieldsList with ChangeNotifier {
   final List<Airfield> _airfields = [];
 
-  static const String _baseUrl =
-      "https://api-redemet.decea.mil.br/aerodromos/?api_key=Ab7mwKofsb2zfTUStwB3ltFSlkO20Ab4bxIczWlu&pais=Brasil";
-
-  static const String _baseUrlStatus =
-      "https://api-redemet.decea.mil.br/aerodromos/status/pais/BRASIL?api_key=Ab7mwKofsb2zfTUStwB3ltFSlkO20Ab4bxIczWlu";
+  final _airfieldInfoUrl = Constants.AIRFIELD_INFO_URL;
+  final _baseUrlStatus = Constants.AIRFIELD_STATUS_URL;
 
   List<Airfield> get airfields {
     return [..._airfields];
@@ -21,7 +19,7 @@ class AirfieldsList with ChangeNotifier {
     final airfieldStatus = await loadAirfieldsColors();
 
     _airfields.clear();
-    final response = await http.get(Uri.parse(_baseUrl));
+    final response = await http.get(Uri.parse(_airfieldInfoUrl));
 
     Map<String, dynamic> rawData = jsonDecode(response.body);
     if (rawData['status'] == true) {
@@ -31,14 +29,27 @@ class AirfieldsList with ChangeNotifier {
             .firstWhere((element) => element.containsKey(airfieldItem['cod']))
             .values
             .first;
+
+        final metarTaf = airfieldItemColor['METAR/TAF'].toString();
+        final metarExp = RegExp(
+          "^(METAR|SPECI)(.|\n)*?(=|${airfieldItem['cod']})\$",
+          multiLine: true,
+        );
+        final tafExp = RegExp(
+          "^(TAF)(.|\n)*?(=|${airfieldItem['cod']})\$",
+          multiLine: true,
+        );
+        final metar = metarExp.firstMatch(metarTaf)?.group(0);
+        final taf = tafExp.firstMatch(metarTaf)?.group(0);
+
         _airfields.add(Airfield(
-          icao: airfieldItem['cod'],
-          city: airfieldItem['cidade'],
-          color: airfieldItemColor['cor'],
-          country: airfieldItem['pais'],
-          name: airfieldItem['nome'],
-          metar: airfieldItemColor['METAR/TAF'],
-        ));
+            icao: airfieldItem['cod'],
+            city: airfieldItem['cidade'],
+            color: airfieldItemColor['cor'],
+            country: airfieldItem['pais'],
+            name: airfieldItem['nome'],
+            metar: metar,
+            taf: taf));
       }
     } else {
       log('status falso');

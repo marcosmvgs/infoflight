@@ -4,14 +4,16 @@ class Airfield {
   final String name;
   final String country;
   String? color;
-  final String metar;
+  String? metar;
+  String? taf;
 
   Airfield({
     required this.icao,
     required this.city,
     required this.country,
     required this.name,
-    required this.metar,
+    this.metar,
+    this.taf,
     this.color,
   });
 }
