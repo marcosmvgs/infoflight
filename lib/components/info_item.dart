@@ -41,9 +41,33 @@ class InfoItem extends StatelessWidget {
               shrinkWrap: true,
               itemCount: productsList.length,
               itemBuilder: (context, index) {
-                return const Card(
-                  child: Text('algo aqui'),
-                );
+                if (productsList[index].label == 'METAR') {
+                  return Card(
+                    elevation: 5,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 10,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(metarText),
+                    ),
+                  );
+                } else if (productsList[index].label == 'TAF') {
+                  return Card(
+                    elevation: 5,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 0,
+                      vertical: 10,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(tafText),
+                    ),
+                  );
+                } else {
+                  return const Text('peguei outra coisa');
+                }
               })
         ],
       ),

@@ -16,4 +16,3 @@ enum Products {
   final IconData icon;
   final String label;
 }
-

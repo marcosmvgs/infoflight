@@ -36,6 +36,7 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
             .selectedAirfieldsList;
     var selectedProductsProvider =
         Provider.of<SelectedProductsList>(context, listen: false);
+    var selectedProductsList = selectedProductsProvider.selectedProductsList;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -86,11 +87,11 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       product: Products.values[index],
                       onSelected: (bool value) {
                         if (value) {
-                          selectedProductsProvider.addProduct(
-                              Products.values[index]);
+                          selectedProductsProvider
+                              .addProduct(Products.values[index]);
                         } else {
-                          selectedProductsProvider.removeProduct(
-                              Products.values[index]);
+                          selectedProductsProvider
+                              .removeProduct(Products.values[index]);
                         }
                       },
                     )),
@@ -110,7 +111,7 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
             },
             child: const Text('Pesquisar'),
           ),
-          _showResults && selectedAirfields.isNotEmpty
+          _showResults && selectedAirfields.isNotEmpty && selectedProductsList.isNotEmpty
               ? SizedBox(
                   height: 500,
                   child: ListView.builder(
@@ -123,14 +124,14 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       }),
                 )
               : Expanded(
-                child: Center(
-                  child: Text(
+                  child: Center(
+                    child: Text(
                       'Selecione os produtos e aeródromos e clique em Pesquisar...',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                ),
-              )
+                  ),
+                )
         ],
       ),
     );
