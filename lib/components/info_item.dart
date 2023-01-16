@@ -21,15 +21,27 @@ class InfoItem extends StatelessWidget {
         horizontal: 10,
         vertical: 20,
       ),
-      color: Colors.blue[100],
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 226, 226, 226),
+            Color.fromARGB(255, 236, 236, 236)
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter)
+      ),
       height: 400,
       width: double.infinity,
       child: Column(
         children: [
           Container(
+            decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            borderRadius: const BorderRadius.vertical(bottom: Radius.zero, top: Radius.circular(10)),
+            ),
             alignment: Alignment.center,
             padding: const EdgeInsets.all(5),
-            color: Colors.green[100],
             width: double.infinity,
             height: 40,
             child: Text(
@@ -42,34 +54,40 @@ class InfoItem extends StatelessWidget {
               itemCount: productsList.length,
               itemBuilder: (context, index) {
                 if (productsList[index].label == 'METAR') {
-                  return Card(
-                    elevation: 5,
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 10,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(metarText),
-                    ),
-                  );
+                  return InfoCard(text: metarText);
                 } else if (productsList[index].label == 'TAF') {
-                  return Card(
-                    elevation: 5,
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 10,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(tafText),
-                    ),
-                  );
+                  return InfoCard(text: tafText);
                 } else {
                   return const Text('peguei outra coisa');
                 }
               })
         ],
+      ),
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  const InfoCard({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color.fromARGB(1, 233, 233, 233),
+      borderOnForeground: false,
+      elevation: 0,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 0,
+        vertical: 10,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(text),
       ),
     );
   }

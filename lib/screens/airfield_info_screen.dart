@@ -27,6 +27,8 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final airfieldsList =
@@ -111,7 +113,9 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
             },
             child: const Text('Pesquisar'),
           ),
-          _showResults && selectedAirfields.isNotEmpty && selectedProductsList.isNotEmpty
+          _showResults &&
+                  selectedAirfields.isNotEmpty &&
+                  selectedProductsList.isNotEmpty
               ? SizedBox(
                   height: 500,
                   child: ListView.builder(
@@ -131,7 +135,7 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
                       style: Theme.of(context).textTheme.headline5,
                     ),
                   ),
-                )
+                ),
         ],
       ),
     );

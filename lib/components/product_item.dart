@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/retry.dart';
 import 'package:infoflight/data/products_data.dart';
 
 class ProductItem extends StatefulWidget {
@@ -14,7 +15,6 @@ class ProductItem extends StatefulWidget {
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
-
 
 class _ProductItemState extends State<ProductItem> {
   bool _isSelected = false;
@@ -42,18 +42,23 @@ class _ProductItemState extends State<ProductItem> {
                           color: Colors.orange,
                         )
                       : null),
-              child: Icon(widget.product.icon,
-              color: Theme.of(context).colorScheme.primaryContainer,),
+              child: Icon(
+                widget.product.icon,
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
-            Text(widget.product.label,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
-              color: Theme.of(context).colorScheme.primaryContainer,
-            ),),
+            Text(
+              widget.product.label,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+            ),
+            
           ],
         ),
       ),
