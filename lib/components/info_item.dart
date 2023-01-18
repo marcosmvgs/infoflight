@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/components/chips_input.dart';
+import 'package:infoflight/data/products_data.dart';
 import 'package:infoflight/models/airfield.dart';
 import 'package:infoflight/models/selected_products_list.dart';
 import 'package:provider/provider.dart';
@@ -22,53 +24,54 @@ class InfoItem extends StatelessWidget {
         vertical: 20,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: const LinearGradient(
-          colors: [
+          borderRadius: BorderRadius.circular(15),
+          gradient: const LinearGradient(colors: [
             Color.fromARGB(255, 226, 226, 226),
             Color.fromARGB(255, 236, 236, 236)
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter)
-      ),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
       height: 400,
       width: double.infinity,
       child: Column(
         children: [
           Container(
             decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: const BorderRadius.vertical(bottom: Radius.zero, top: Radius.circular(10)),
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.zero, top: Radius.circular(10)),
             ),
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(5),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 5,
+            ),
             width: double.infinity,
             height: 40,
-            child: Text(
-              airfield.icao,
-              style: const TextStyle(color: Colors.black, fontSize: 16),
-            ),
+            child: Row(children: [
+              inputCircleColor(airfield.color),
+              const SizedBox(width: 10),
+              Text(
+                "${airfield.icao} - ${airfield.city}",
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
+            ]),
           ),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: productsList.length,
-              itemBuilder: (context, index) {
-                if (productsList[index].label == 'METAR') {
-                  return InfoCard(text: metarText);
-                } else if (productsList[index].label == 'TAF') {
-                  return InfoCard(text: tafText);
-                } else {
-                  return const Text('peguei outra coisa');
-                }
-              })
+          productsList.contains(Products.metar)
+              ? EachInfo(text: metarText)
+              : const SizedBox(),
+          productsList.contains(Products.taf)
+              ? EachInfo(text: tafText)
+              : const SizedBox(),
         ],
       ),
     );
   }
 }
 
-class InfoCard extends StatelessWidget {
-  const InfoCard({
+class EachInfo extends StatelessWidget {
+  const EachInfo({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -77,18 +80,8 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: const Color.fromARGB(1, 233, 233, 233),
-      borderOnForeground: false,
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 0,
-        vertical: 10,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(text),
-      ),
-    );
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Text(text));
   }
 }

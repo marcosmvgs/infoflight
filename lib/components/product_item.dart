@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/retry.dart';
 import 'package:infoflight/data/products_data.dart';
 
 class ProductItem extends StatefulWidget {

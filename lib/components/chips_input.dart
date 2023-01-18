@@ -87,15 +87,15 @@ class _ChipsInputWidgetState extends State<ChipsInputWidget> {
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         );
       },
-      suggestionBuilder: (context, state, Airfield profile) {
+      suggestionBuilder: (context, state, Airfield airfield) {
         return Column(
           children: [
             ListTile(
-                key: ObjectKey(profile),
-                title: Text(profile.icao),
-                subtitle: Text(profile.city),
-                onTap: () => state.selectSuggestion(profile),
-                trailing: inputCircleColor(profile.color)),
+                key: ObjectKey(airfield),
+                title: Text(airfield.icao),
+                subtitle: Text(airfield.city),
+                onTap: () => state.selectSuggestion(airfield),
+                trailing: inputCircleColor(airfield.color)),
                 const Divider(thickness: 1.3,)
           ],
         );

@@ -27,8 +27,6 @@ class _AirfieldInforScreenState extends State<AirfieldInforScreen> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final airfieldsList =
