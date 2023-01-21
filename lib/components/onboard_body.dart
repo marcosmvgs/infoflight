@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/splash_content.dart';
 import 'package:infoflight/utils/app_routes.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class OnboardBody extends StatefulWidget {
+  const OnboardBody({super.key});
 
   @override
-  State<Body> createState() => _BodyState();
+  State<OnboardBody> createState() => _OnboardBodyState();
 }
 
-class _BodyState extends State<Body> {
+class _OnboardBodyState extends State<OnboardBody> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
@@ -107,7 +107,7 @@ class _BodyState extends State<Body> {
                       ),
                     ),
                     const SizedBox(
-                      height: 250,
+                      height: 100,
                     ),
                     SizedBox(
                       width: size.width * 0.8,
@@ -123,13 +123,37 @@ class _BodyState extends State<Body> {
                           );
                         },
                         child: Text(
-                          'Continue',
+                          'Entrar',
                           style: TextStyle(
                               color: Theme.of(context).scaffoldBackgroundColor,
                               fontSize: 16),
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      width: size.width * 0.8,
+                      height: 40,
+                      child: ElevatedButton(
+                        style:ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromRGBO(1, 1, 1, 0.0),
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.secondaryContainer,
+                          )
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.HOMEPAGE,
+                          );
+                        },
+                        child: const Text(
+                          'Registrar',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ))
