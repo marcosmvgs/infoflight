@@ -4,6 +4,7 @@ import 'package:infoflight/models/selected_airfields_list.dart';
 import 'package:infoflight/models/selected_products_list.dart';
 import 'package:infoflight/screens/airfield_info_screen.dart';
 import 'package:infoflight/screens/create_flight_screen.dart';
+import 'package:infoflight/screens/homepage_sceen.dart';
 import 'package:infoflight/screens/onboard_screen.dart';
 import 'package:infoflight/screens/profile_seetings_screen.dart';
 import 'package:infoflight/utils/app_routes.dart';
@@ -64,11 +65,12 @@ class MyApp extends StatelessWidget {
               backgroundColor: const Color.fromARGB(255, 236, 236, 236),
             )),
         routes: {
-          AppRoutes.HOMEPAGE: (context) => const OnboardScreen(),
+          AppRoutes.HOMEPAGE: (context) => const HomepageScreen(),
           AppRoutes.CREATE_FLIGHT: (context) => const CreateFlightScreen(),
           AppRoutes.PROFILE_SETTINGS: (context) =>
               const ProfileSettingsScreen(),
           AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInforScreen(),
+          AppRoutes.ONBOARD: (context) => const OnboardScreen(),
         },
       ),
     );
