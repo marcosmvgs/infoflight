@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:infoflight/models/airfields_list.dart';
-import 'package:infoflight/models/selected_airfields_list.dart';
-import 'package:infoflight/models/selected_products_list.dart';
+import 'package:infoflight/core/models/airfields_list.dart';
+import 'package:infoflight/core/models/selected_airfields_list.dart';
+import 'package:infoflight/core/models/selected_products_list.dart';
 import 'package:infoflight/screens/airfield_info_screen.dart';
 import 'package:infoflight/screens/create_flight_screen.dart';
 import 'package:infoflight/screens/homepage_sceen.dart';
+import 'package:infoflight/screens/login_screen.dart';
 import 'package:infoflight/screens/onboard_screen.dart';
 import 'package:infoflight/screens/profile_seetings_screen.dart';
 import 'package:infoflight/utils/app_routes.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AirfieldsList()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'InfoFlight',
         theme: theme.copyWith(
             scaffoldBackgroundColor: const Color.fromRGBO(26, 26, 26, 1.0),
@@ -71,6 +73,7 @@ class MyApp extends StatelessWidget {
               const ProfileSettingsScreen(),
           AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInforScreen(),
           AppRoutes.ONBOARD: (context) => const OnboardScreen(),
+          AppRoutes.LOGIN: (context) => const LoginScreen(),
         },
       ),
     );

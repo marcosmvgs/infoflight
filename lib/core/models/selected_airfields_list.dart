@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:infoflight/models/airfield.dart';
+import 'package:infoflight/core/models/airfield.dart';
 
 class SelectedAirfieldsList with ChangeNotifier {
   List<Airfield> _selectedAirfieldsList = [];

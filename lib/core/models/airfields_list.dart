@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
-import 'package:infoflight/models/airfield.dart';
+import 'package:infoflight/core/models/airfield.dart';
 import 'package:http/http.dart' as http;
 import 'package:infoflight/utils/constants.dart';
 

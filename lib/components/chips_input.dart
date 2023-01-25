@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:infoflight/models/airfield.dart';
-import 'package:infoflight/models/selected_airfields_list.dart';
+import 'package:infoflight/core/models/airfield.dart';
+import 'package:infoflight/core/models/selected_airfields_list.dart';
 import 'package:provider/provider.dart';
 
 Widget inputCircleColor(String? label) {

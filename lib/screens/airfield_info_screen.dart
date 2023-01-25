@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/chips_input.dart';
 import 'package:infoflight/components/info_item.dart';
 import 'package:infoflight/components/product_item.dart';
-import 'package:infoflight/data/products_data.dart';
-import 'package:infoflight/models/airfields_list.dart';
-import 'package:infoflight/models/selected_airfields_list.dart';
-import 'package:infoflight/models/selected_products_list.dart';
+import 'package:infoflight/core/data/products_data.dart';
+import 'package:infoflight/core/models/airfields_list.dart';
+import 'package:infoflight/core/models/selected_airfields_list.dart';
+import 'package:infoflight/core/models/selected_products_list.dart';
 import 'package:provider/provider.dart';
 
 class AirfieldInforScreen extends StatefulWidget {

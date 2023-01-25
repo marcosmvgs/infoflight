@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infoflight/data/products_data.dart';
+import 'package:infoflight/core/data/products_data.dart';
 
 class ProductItem extends StatefulWidget {
   final Products product;

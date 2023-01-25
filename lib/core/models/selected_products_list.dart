@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:infoflight/data/products_data.dart';
+import 'package:infoflight/core/data/products_data.dart';
 
 class SelectedProductsList with ChangeNotifier {
   List<Products> _selectedProductsList = [];

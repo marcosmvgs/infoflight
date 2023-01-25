@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infoflight/data/drawer_data.dart';
+import 'package:infoflight/core/data/drawer_data.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

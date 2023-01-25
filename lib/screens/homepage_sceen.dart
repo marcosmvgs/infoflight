@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/app_drawer.dart';
-import 'package:infoflight/models/airfields_list.dart';
+import 'package:infoflight/core/models/airfields_list.dart';
 import 'package:infoflight/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 

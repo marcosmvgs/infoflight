@@ -11,7 +11,7 @@ enum DrawerItems {
   criarVoo(
     title: 'Criar voo',
     icon: Icons.airplanemode_on,
-    routeToNavigate: AppRoutes.HOMEPAGE,
+    routeToNavigate: AppRoutes.CREATE_FLIGHT,
   ),
 
   informacaoAerodromo(

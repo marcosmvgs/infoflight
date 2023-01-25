@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/components/button_mockup.dart';
 import 'package:infoflight/components/splash_content.dart';
 import 'package:infoflight/utils/app_routes.dart';
 
@@ -110,50 +111,27 @@ class _OnboardBodyState extends State<OnboardBody> {
                       height: 100,
                     ),
                     SizedBox(
-                      width: size.width * 0.8,
-                      height: 40,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll<Color>(
-                              Theme.of(context).colorScheme.secondaryContainer),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.HOMEPAGE,
-                          );
-                        },
-                        child: Text(
-                          'Entrar',
-                          style: TextStyle(
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                              fontSize: 16),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
+                        width: size.width * 0.9,
+                        height: 50,
+                        child: ButtonMockUp(
+                          labelText: 'Login',
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(AppRoutes.LOGIN);
+                          },
+                          backColor: Theme.of(context)
+                              .colorScheme
+                              .secondaryContainer
+                              .withAlpha(195),
+                        )),
+                    const SizedBox(height: 10),
                     SizedBox(
-                      width: size.width * 0.8,
-                      height: 40,
-                      child: ElevatedButton(
-                        style:ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromRGBO(1, 1, 1, 0.0),
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondaryContainer,
-                          )
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.HOMEPAGE,
-                          );
-                        },
-                        child: const Text(
-                          'Registrar',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16),
-                        ),
-                      ),
-                    ),
+                        width: size.width * 0.9,
+                        height: 50,
+                        child: ButtonMockUp(
+                          labelText: 'Cadastrar',
+                          onPressed: () {},
+                          backColor: const Color.fromARGB(255, 204, 204, 204),
+                        )),
                   ],
                 ),
               ))
