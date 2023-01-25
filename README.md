@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+![Mock](https://raw.githubusercontent.com/marcosmvgs/infoflight/develop/assets/images/CAPA%20REPOSIT%C3%93RIO.png)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
