@@ -2,8 +2,7 @@
 
 A new Flutter project.
 
-![Mock](https://raw.githubusercontent.com/marcosmvgs/infoflight/develop/assets/images/CAPA%20REPOSIT%C3%93RIO.png)
-<img src="https://raw.githubusercontent.com/marcosmvgs/infoflight/develop/assets/images/CAPA%20REPOSIT%C3%93RIO.png" alt="drawing" width="200"/>
+<img src="https://raw.githubusercontent.com/marcosmvgs/infoflight/develop/assets/images/CAPA%20REPOSIT%C3%93RIO.png" alt="mockup-app" width="400"/>
 
 ## Getting Started
 
