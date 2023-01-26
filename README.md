@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+<img src="https://raw.githubusercontent.com/marcosmvgs/infoflight/develop/assets/images/CAPA%20REPOSIT%C3%93RIO.png" alt="mockup-app" width="400"/>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
