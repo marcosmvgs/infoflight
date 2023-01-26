@@ -7,7 +7,7 @@ class RoundedInputField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final Size size;
 
-  const RoundedInputField({
+  RoundedInputField({
     Key? key,
     required this.size,
     required this.hintText,
@@ -15,11 +15,21 @@ class RoundedInputField extends StatelessWidget {
     required this.onChanged,
   }) : super(key: key);
 
+  final RegExp regExp = RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
+
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       size: size,
       child: TextFormField(
+        validator: (email_) {
+          final email = email_ ?? '';
+          if (!regExp.hasMatch(email)) {
+            return 'Email inválido';
+          }
+          return null;
+        },
         onChanged: onChanged,
         decoration: InputDecoration(
             icon: Icon(
@@ -32,4 +42,3 @@ class RoundedInputField extends StatelessWidget {
     );
   }
 }
-

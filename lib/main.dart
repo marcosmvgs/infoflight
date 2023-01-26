@@ -5,7 +5,7 @@ import 'package:infoflight/core/models/selected_products_list.dart';
 import 'package:infoflight/screens/airfield_info_screen.dart';
 import 'package:infoflight/screens/create_flight_screen.dart';
 import 'package:infoflight/screens/homepage_sceen.dart';
-import 'package:infoflight/screens/login_screen.dart';
+import 'package:infoflight/screens/auth_screen.dart';
 import 'package:infoflight/screens/onboard_screen.dart';
 import 'package:infoflight/screens/profile_seetings_screen.dart';
 import 'package:infoflight/utils/app_routes.dart';
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
               const ProfileSettingsScreen(),
           AppRoutes.AIRFIELD_INFO: (context) => const AirfieldInforScreen(),
           AppRoutes.ONBOARD: (context) => const OnboardScreen(),
-          AppRoutes.LOGIN: (context) => const LoginScreen(),
+          AppRoutes.LOGIN: (context) => const AuthScreen(),
         },
       ),
     );
