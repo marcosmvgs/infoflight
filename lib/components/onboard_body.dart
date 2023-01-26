@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/button_mockup.dart';
 import 'package:infoflight/components/splash_content.dart';
 import 'package:infoflight/utils/app_routes.dart';
+import 'package:infoflight/utils/constants.dart';
 
 class OnboardBody extends StatefulWidget {
   const OnboardBody({super.key});
@@ -36,7 +37,6 @@ class _OnboardBodyState extends State<OnboardBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return SafeArea(
         child: SizedBox(
       height: size.height,
@@ -47,26 +47,23 @@ class _OnboardBodyState extends State<OnboardBody> {
           Positioned(
             height: size.height,
             child: Image.asset(
-                "assets/images/clay-banks-O5hfuVWgsS8-unsplash.jpg"),
+              "assets/images/clay-banks-O5hfuVWgsS8-unsplash.jpg",
+            ),
           ),
           Positioned(
               child: Container(
             width: size.width,
             height: size.height,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              colors: [Colors.black, Color.fromRGBO(1, 1, 1, 0.0)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            )),
+            decoration:
+                const BoxDecoration(gradient: Constants.kBackgroundGradient),
           )),
-          Positioned(
+          const Positioned(
             top: 50,
             child: Text(
               "infoFlight",
               style: TextStyle(
                 fontFamily: 'Oswald',
-                color: Theme.of(context).colorScheme.secondaryContainer,
+                color: Constants.KHighLightColor,
                 fontSize: 60,
               ),
             ),
@@ -116,12 +113,9 @@ class _OnboardBodyState extends State<OnboardBody> {
                         child: ButtonMockUp(
                           labelText: 'Login',
                           onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.LOGIN);
+                            Navigator.of(context).pushNamed(AppRoutes.AUTH_OR_APP);
                           },
-                          backColor: Theme.of(context)
-                              .colorScheme
-                              .secondaryContainer
-                              .withAlpha(195),
+                          backColor: Constants.KHighLightColor,
                         )),
                     const SizedBox(height: 10),
                     SizedBox(
@@ -130,7 +124,7 @@ class _OnboardBodyState extends State<OnboardBody> {
                         child: ButtonMockUp(
                           labelText: 'Cadastrar',
                           onPressed: () {},
-                          backColor: const Color.fromARGB(255, 204, 204, 204),
+                          backColor: Constants.kNeutralColor,
                         )),
                   ],
                 ),
@@ -148,8 +142,8 @@ class _OnboardBodyState extends State<OnboardBody> {
       width: currentPage == index ? 20 : 6,
       decoration: BoxDecoration(
         color: currentPage == index
-            ? Theme.of(context).colorScheme.secondaryContainer
-            : Colors.grey,
+            ? Constants.KHighLightColor
+            : Constants.kNeutralColor,
         borderRadius: BorderRadius.circular(3),
       ),
     );

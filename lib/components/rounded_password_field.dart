@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/textfield_container.dart';
 
-class RoundedPasswordField extends StatefulWidget {
+class RoundedInputPasswordField extends StatefulWidget {
   final ValueChanged<String> onChaged;
   final String labelText;
-  const RoundedPasswordField({
+  const RoundedInputPasswordField({
     Key? key,
     required this.size,
     required this.onChaged,
@@ -14,10 +14,11 @@ class RoundedPasswordField extends StatefulWidget {
   final Size size;
 
   @override
-  State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
+  State<RoundedInputPasswordField> createState() =>
+      _RoundedInputPasswordFieldState();
 }
 
-class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+class _RoundedInputPasswordFieldState extends State<RoundedInputPasswordField> {
   bool _obscureText = true;
 
   @override
@@ -25,13 +26,6 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
     return TextFieldContainer(
         size: widget.size,
         child: TextFormField(
-          validator: (password_) {
-            final password = password_ ?? '';
-            if (password.trim().length < 6) {
-              return 'Senha deve ter no mínimo 6 caracteres';
-            }
-            return null;
-          },
           onChanged: widget.onChaged,
           obscureText: _obscureText,
           decoration: InputDecoration(

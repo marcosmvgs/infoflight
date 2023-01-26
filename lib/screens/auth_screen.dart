@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/auth_form.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/core/services/auth_service.dart';
+import 'package:infoflight/utils/constants.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -45,65 +46,62 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 32, 32, 32),
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            bottom: 95,
-            left: 5,
-            width: size.width + 5,
+          SizedBox(
+            width: size.width,
             height: size.height,
-            child: Image.asset(
-              'assets/images/login_image.jpg',
-              fit: BoxFit.cover,
+          ),
+          Positioned(
+            bottom: 80,
+            child: Container(
+              width: size.width,
+              height: size.height,
+              child: Image.asset(
+                'assets/images/login_image.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Positioned(
+            bottom: 0,
+            child: Container(
               width: size.width,
               height: size.height * 0.5,
-              bottom: 0,
-              child: Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(0, 0, 0, 0),
-                    Color.fromARGB(255, 17, 17, 17),
-                  ],
-                  begin: Alignment(0, -1),
-                  end: Alignment(0, 1),
-                )),
-              )),
-          Positioned(
-            top: 100,
-            child: Text(
-              "Vamos começar!",
-              style: TextStyle(
-                fontFamily: 'Oswald',
-                color: Theme.of(context)
-                    .colorScheme
-                    .secondaryContainer
-                    .withAlpha(185),
-                fontSize: 50,
-              ),
+              decoration:
+                  const BoxDecoration(gradient: Constants.kBackgroundGradient),
             ),
           ),
           Positioned(
-              top: 200,
-              height: size.height * 0.7,
-              child: AuthForm(
-                onSubmit: _handleSubmit,
-                size: size,
-              )),
-          if (_isLoading)
-            Container(
-              decoration:
-                  const BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
-              child: Center(
-                child: RefreshProgressIndicator(
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                ),
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.fromLTRB(10, 50, 10, 20),
+              width: size.width,
+              height: size.height,
+              child: Column(
+                children: [
+                  const Text(
+                    'Vamos começar!',
+                    style: TextStyle(
+                        fontSize: 50,
+                        color: Constants.KHighLightColor,
+                        fontFamily: 'Oswald'),
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Preencha seu email e senha\n ou faça o login com uma rede social.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Constants.kNeutralColor, fontSize: 14),
+                    ),
+                  ),
+                  AuthForm(size: size, onSubmit: _handleSubmit)
+                ],
               ),
-            )
+            ),
+          ),
         ],
       ),
     );

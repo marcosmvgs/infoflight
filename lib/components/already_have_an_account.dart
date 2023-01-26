@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/utils/constants.dart';
 
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
   final bool login;
@@ -13,12 +14,13 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           login
           ? 'Não tem uma conta?'
           : 'Já possui uma conta?',
-          style: TextStyle(color: Colors.white, fontSize: 14),
+          style: TextStyle(color: Constants.kNeutralColor, fontSize: 14),
         ),
         GestureDetector(
           onTap: press,
@@ -27,7 +29,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
             ? ' Registre-se!'
             : ' Entre!',
               style: const TextStyle(
-                  color: Colors.white,
+                  color: Constants.kNeutralColor,
                   fontSize: 14,
                   fontWeight: FontWeight.bold)),
         ),

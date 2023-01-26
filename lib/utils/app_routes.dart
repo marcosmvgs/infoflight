@@ -7,4 +7,5 @@ class AppRoutes {
   static const String AIRFIELD_INFO = '/airfield-info';
   static const String ONBOARD = '/';
   static const String LOGIN = '/login';
+  static const String AUTH_OR_APP = '/auth-or-app';
 }
