@@ -4,10 +4,11 @@ import 'package:infoflight/core/models/selected_airfields_list.dart';
 import 'package:infoflight/core/models/selected_products_list.dart';
 import 'package:infoflight/core/services/auth_or_app.dart';
 import 'package:infoflight/screens/airfield_info_screen.dart';
+import 'package:infoflight/screens/auth_screens.dart/signup_screen.dart';
 import 'package:infoflight/screens/create_flight_screen.dart';
-import 'package:infoflight/screens/forgot_password_screen.dart';
+import 'package:infoflight/screens/auth_screens.dart/forgot_password_screen.dart';
 import 'package:infoflight/screens/homepage_sceen.dart';
-import 'package:infoflight/screens/auth_screen.dart';
+import 'package:infoflight/screens/auth_screens.dart/auth_screen.dart';
 import 'package:infoflight/screens/onboard_screen.dart';
 import 'package:infoflight/screens/profile_seetings_screen.dart';
 import 'package:infoflight/utils/app_routes.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.LOGIN: (context) => const AuthScreen(),
           AppRoutes.AUTH_OR_APP: (context) => const AuthOrApp(),
           AppRoutes.FORGOT_PASSWORD: (context) => const ForgotPasswordScreen(),
+          AppRoutes.SIGNUP: (context) => const SignupScreen(),
         },
       ),
     );

@@ -97,16 +97,12 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           SizedBox(height: getProportionateScreenHeight(10)),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(10)),
-          SizedBox(
-            width: size.width * 0.9,
-            height: 50,
-            child: ButtonMockUp(
-              labelText: 'Continue',
-              onPressed: () {
-                _formKey.currentState?.validate();
-              },
-              backColor: Constants.KHighLightColor,
-            ),
+          ButtonMockUp(
+            labelText: 'Continue',
+            onPressed: () {
+              _formKey.currentState?.validate();
+            },
+            backColor: Constants.KHighLightColor,
           ),
           SizedBox(height: SizeConfig.screenHeight! * 0.02),
           const NoAccountText(),

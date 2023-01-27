@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:infoflight/core/models/app_user.dart';
 import 'package:infoflight/core/services/auth_service.dart';
-import 'package:infoflight/screens/auth_screen.dart';
+import 'package:infoflight/screens/auth_screens.dart/auth_screen.dart';
 import 'package:infoflight/screens/homepage_sceen.dart';
 import 'package:infoflight/screens/loading_screen.dart';
 

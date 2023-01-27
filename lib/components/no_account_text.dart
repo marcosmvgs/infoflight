@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/utils/app_routes.dart';
 
 import '../utils/constants.dart';
 import '../utils/size_config.dart';
@@ -18,7 +19,7 @@ class NoAccountText extends StatelessWidget {
           style: Constants.kTextStyleNeutral,
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () => Navigator.of(context).pushNamed(AppRoutes.SIGNUP),
           child: Text(
             'Cadastre-se? ',
             style: TextStyle(

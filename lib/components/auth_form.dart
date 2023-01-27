@@ -86,14 +86,10 @@ class _AuthFormState extends State<AuthForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(10)),
-          SizedBox(
-            width: widget.size.width * 0.9,
-            height: 50,
-            child: ButtonMockUp(
-              labelText: _formData.isLogin ? 'Entrar' : 'Cadastrar',
-              onPressed: _submit,
-              backColor: Constants.KHighLightColor,
-            ),
+          ButtonMockUp(
+            labelText: _formData.isLogin ? 'Entrar' : 'Cadastrar',
+            onPressed: _submit,
+            backColor: Constants.KHighLightColor,
           ),
           SizedBox(height: getProportionateScreenHeight(20)),
           Row(

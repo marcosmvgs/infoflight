@@ -3,7 +3,7 @@ import 'package:infoflight/components/auth_form.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/core/services/auth_service.dart';
 import 'package:infoflight/utils/constants.dart';
-import '../utils/size_config.dart';
+import '../../utils/size_config.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});

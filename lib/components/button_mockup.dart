@@ -14,17 +14,22 @@ class ButtonMockUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(35),
-      child: ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll<Color>(backColor)),
-        onPressed: onPressed,
-        child: Text(
-          labelText,
-          style: TextStyle(
-            fontSize: 18,
-            color: Theme.of(context).scaffoldBackgroundColor,
+    Size size = MediaQuery.of(context).size;
+    return SizedBox(
+      width: size.width,
+      height: 50,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(35),
+        child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll<Color>(backColor)),
+          onPressed: onPressed,
+          child: Text(
+            labelText,
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
           ),
         ),
       ),
