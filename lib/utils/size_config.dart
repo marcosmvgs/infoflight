@@ -13,6 +13,7 @@ class SizeConfig {
     screenHeight = _mediaQueryData!.size.height;
     orientation = _mediaQueryData!.orientation;
   }
+
 }
 
 double getProportionateScreenHeight(double inputHeight) {

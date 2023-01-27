@@ -3,6 +3,7 @@ import 'package:infoflight/components/button_mockup.dart';
 import 'package:infoflight/components/splash_content.dart';
 import 'package:infoflight/utils/app_routes.dart';
 import 'package:infoflight/utils/constants.dart';
+import 'package:infoflight/utils/size_config.dart';
 
 class OnboardBody extends StatefulWidget {
   const OnboardBody({super.key});
@@ -50,13 +51,7 @@ class _OnboardBodyState extends State<OnboardBody> {
               "assets/images/clay-banks-O5hfuVWgsS8-unsplash.jpg",
             ),
           ),
-          Positioned(
-              child: Container(
-            width: size.width,
-            height: size.height,
-            decoration:
-                const BoxDecoration(gradient: Constants.kBackgroundGradient),
-          )),
+          
           const Positioned(
             top: 50,
             child: Text(
@@ -64,18 +59,18 @@ class _OnboardBodyState extends State<OnboardBody> {
               style: TextStyle(
                 fontFamily: 'Oswald',
                 color: Constants.KHighLightColor,
-                fontSize: 60,
+                fontSize: 70,
               ),
             ),
           ),
           Positioned(
-            top: 150,
+            top: 170,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 20,
               ),
-              height: size.height * 0.4,
+              height: size.height * 0.2,
               width: size.width,
               child: PageView.builder(
                   onPageChanged: (value) {
@@ -93,42 +88,33 @@ class _OnboardBodyState extends State<OnboardBody> {
             ),
           ),
           Positioned(
-              top: 350,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      children: List.generate(
-                        splashData.length,
-                        (index) => buildDot(context, index: index),
-                      ),
+            top: 400,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: List.generate(
+                      splashData.length,
+                      (index) => buildDot(context, index: index),
                     ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    SizedBox(
-                        width: size.width * 0.9,
-                        height: 50,
-                        child: ButtonMockUp(
-                          labelText: 'Login',
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(AppRoutes.AUTH_OR_APP);
-                          },
-                          backColor: Constants.KHighLightColor,
-                        )),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                        width: size.width * 0.9,
-                        height: 50,
-                        child: ButtonMockUp(
-                          labelText: 'Cadastrar',
-                          onPressed: () {},
-                          backColor: Constants.kNeutralColor,
-                        )),
-                  ],
-                ),
-              ))
+                  ),
+                  SizedBox(height: getProportionateScreenHeight(230)),
+                  SizedBox(
+                      width: size.width * 0.9,
+                      height: 50,
+                      child: ButtonMockUp(
+                        labelText: 'Entrar',
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.AUTH_OR_APP);
+                        },
+                        backColor: Constants.KHighLightColor,
+                      )),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     ));
@@ -143,7 +129,7 @@ class _OnboardBodyState extends State<OnboardBody> {
       decoration: BoxDecoration(
         color: currentPage == index
             ? Constants.KHighLightColor
-            : Constants.kNeutralColor,
+            : const Color.fromARGB(255, 26, 26, 26),
         borderRadius: BorderRadius.circular(3),
       ),
     );

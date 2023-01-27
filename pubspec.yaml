@@ -42,6 +42,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_form_builder: ^7.7.0
   intl: ^0.17.0
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,10 @@ flutter:
     - assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg
     - assets/images/clay-banks-O5hfuVWgsS8-unsplash.jpg
     - assets/images/login_image.jpg
+    - assets/icons/facebook-2.svg
+    - assets/icons/google-icon.svg
+    - assets/icons/twitter.svg
+    - assets/images/forgot_password_screen_image.jpg
   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

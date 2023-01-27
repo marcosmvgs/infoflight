@@ -8,4 +8,5 @@ class AppRoutes {
   static const String ONBOARD = '/';
   static const String LOGIN = '/login';
   static const String AUTH_OR_APP = '/auth-or-app';
+  static const String FORGOT_PASSWORD = '/forgot_password';
 }

@@ -8,6 +8,7 @@ class RoundedInputEmailField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final Size size;
   final String? Function(String?)? validator;
+  final void Function(String?)? onSaved;
 
   const RoundedInputEmailField(
       {Key? key,
@@ -15,7 +16,8 @@ class RoundedInputEmailField extends StatelessWidget {
       required this.hintText,
       this.icon = Icons.person,
       required this.onChanged,
-      this.validator})
+      this.validator,
+      this.onSaved})
       : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class RoundedInputEmailField extends StatelessWidget {
     return TextFieldContainer(
       size: size,
       child: TextFormField(
+        onSaved: onSaved,
         validator: validator,
         onChanged: onChanged,
         decoration: InputDecoration(
