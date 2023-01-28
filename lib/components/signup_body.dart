@@ -3,6 +3,7 @@ import 'package:infoflight/components/button_mockup.dart';
 import 'package:infoflight/components/form_error.dart';
 import 'package:infoflight/components/rounded_input_email_field.dart';
 import 'package:infoflight/components/rounded_password_field.dart';
+import 'package:infoflight/components/social_card.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/utils/constants.dart';
 import 'package:infoflight/utils/size_config.dart';
@@ -13,34 +14,60 @@ class SignupBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      width: double.infinity,
-      height: size.height,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          getProportionateScreenWidth(20),
-          getProportionateScreenWidth(100),
-          getProportionateScreenWidth(20),
-          getProportionateScreenWidth(40),
-        ),
-        child: Column(
-          children: const [
-            Text(
-              'Registrar conta',
-              style: TextStyle(
-                  fontSize: 50,
-                  fontFamily: 'Oswald',
-                  color: Constants.KHighLightColor),
-            ),
-            Expanded(
-              child: Text(
-                'Preencha os campos ou prossiga com uma Media Social',
-                textAlign: TextAlign.center,
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Positioned(
+            child: SizedBox(
+              width: size.width,
+              height: size.height,
+              child: Image.asset(
+                'assets/images/signup_screen_image.jpg',
+                fit: BoxFit.cover,
               ),
             ),
-            SignupForm(),
-          ],
-        ),
+          ),
+          Container(
+            width: size.width,
+            height: size.height,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+              colors: [Colors.black, Color.fromARGB(0, 0, 0, 0), Colors.black],
+              begin: Alignment(0, -0.6),
+              end: Alignment(0, 0.7),
+            )),
+          ),
+          SizedBox(
+            width: size.width,
+            height: size.height,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                getProportionateScreenWidth(20),
+                getProportionateScreenWidth(70),
+                getProportionateScreenWidth(20),
+                getProportionateScreenWidth(40),
+              ),
+              child: Column(
+                children: const [
+                  Text(
+                    'Registrar conta',
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontFamily: 'Oswald',
+                        color: Constants.KHighLightColor),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Preencha os campos ou prossiga com uma Media Social',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SignupForm(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -59,6 +86,7 @@ class _SignupFormState extends State<SignupForm> {
   String? password;
   final _formData = AuthFormData();
   final List<String> errors = [];
+  final List<bool> requirementsColors = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +96,15 @@ class _SignupFormState extends State<SignupForm> {
       child: Column(
         children: [
           buildEmailFormField(size),
-          SizedBox(height: getProportionateScreenHeight(18)),
-          buildPasswordFormField(size),
-          SizedBox(height: getProportionateScreenHeight(18)),
+          SizedBox(height: getProportionateScreenHeight(25)),
+          buildPasswordFormField(size, requirementsColors),
+          SizedBox(height: getProportionateScreenHeight(25)),
           buildConfirmPasswordFormField(size),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(height: getProportionateScreenHeight(25)),
+          FormPasswordcheck(requirementColor: requirementsColors),
+          SizedBox(height: getProportionateScreenHeight(25)),
           FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(height: getProportionateScreenHeight(25)),
           ButtonMockUp(
             labelText: 'Continue',
             onPressed: () {
@@ -85,6 +115,20 @@ class _SignupFormState extends State<SignupForm> {
             },
             backColor: Constants.KHighLightColor,
           ),
+          SizedBox(height: getProportionateScreenHeight(25)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              SocialCard(icon: 'assets/icons/facebook-2.svg'),
+              SocialCard(icon: 'assets/icons/google-icon.svg'),
+              SocialCard(icon: 'assets/icons/twitter.svg')
+            ],
+          ),
+          SizedBox(height: getProportionateScreenHeight(25)),
+          const Text(
+            'Ao continuar, você concorda com nossa Política de Privacidade',
+            textAlign: TextAlign.center,
+          )
         ],
       ),
     );
@@ -92,7 +136,7 @@ class _SignupFormState extends State<SignupForm> {
 
   RoundedInputPasswordField buildConfirmPasswordFormField(Size size) {
     return RoundedInputPasswordField(
-      onSaved: (typedPassword) => _formData.confirmedPassword = typedPassword!,
+      onSaved: (typedPassword) {},
       labelText: 'Confirme sua senha',
       size: size,
       onChaged: (password) {
@@ -101,15 +145,31 @@ class _SignupFormState extends State<SignupForm> {
     );
   }
 
-  RoundedInputPasswordField buildPasswordFormField(Size size) {
+  RoundedInputPasswordField buildPasswordFormField(
+      Size size, List<bool> requirementsColors) {
     return RoundedInputPasswordField(
-      onSaved: (typedPassword) => _formData.password = typedPassword!,
-      labelText: 'Digite sua senha',
-      size: size,
-      onChaged: (password) {
-        _formData.password = password;
-      },
-    );
+        onSaved: (typedPassword) => _formData.password = typedPassword!,
+        labelText: 'Digite sua senha',
+        size: size,
+        onChaged: (password) {
+          if (requirementsColors[0] == false) {
+            if (password.trim().length < 6) {
+              return;
+            } else {
+              setState(() {
+                requirementsColors[0] = true;
+              });
+            }
+          } else {
+            if (password.trim().length < 6) {
+              setState(() {
+                requirementsColors[0] = false;
+              });
+            } else {
+              return;
+            }
+          }
+        });
   }
 
   RoundedInputEmailField buildEmailFormField(Size size) {

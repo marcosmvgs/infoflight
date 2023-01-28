@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
+
 abstract class Constants {
   static const AIRFIELD_INFO_URL =
       "https://api-redemet.decea.mil.br/aerodromos/?api_key=Ab7mwKofsb2zfTUStwB3ltFSlkO20Ab4bxIczWlu&pais=Brasil";
@@ -15,10 +16,11 @@ abstract class Constants {
       begin: Alignment(0, -1),
       end: Alignment(0, 0.6));
 
-  static const kTextStyleNeutral =
-      TextStyle(color: kNeutralColor, fontSize: 16, fontWeight: FontWeight.w400);
+  static const kTextStyleNeutral = TextStyle(
+      color: kNeutralColor, fontSize: 16, fontWeight: FontWeight.w400);
 
   static final RegExp regExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z]+");
+  static final RegExp regEpxUpperLowerCase = RegExp(r"(?=.*[a-z])(?=.*[A-Z])");
 
   static const String kEmailNullError = 'Por favor, insira seu email.';
   static const String kInvalidEmailError = 'Por favor, insira um email válido.';

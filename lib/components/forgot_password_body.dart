@@ -79,19 +79,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
               }
             },
             validator: (value) {
-              final value_ = value ?? '';
-              if (value_.isEmpty &&
-                  !errors.contains(Constants.kEmailNullError)) {
-                setState(() {
-                  errors.add(Constants.kEmailNullError);
-                });
-              } else if (!Constants.regExp.hasMatch(value_) &&
-                  !errors.contains(Constants.kInvalidEmailError)) {
-                setState(() {
-                  errors.add(Constants.kInvalidEmailError);
-                });
-              }
-              return null;
+              getEmailErrorString(value, setState, errors);
             },
           ),
           SizedBox(height: getProportionateScreenHeight(10)),
