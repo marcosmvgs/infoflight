@@ -3,7 +3,7 @@ import '../../core/models/auth_form_data.dart';
 import '../../utils/constants.dart';
 import '../../utils/size_config.dart';
 import '../button_mockup.dart';
-import '../form_error.dart';
+import '../form_errors.dart';
 import '../social_card.dart';
 
 class SignupForm extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   final _formData = AuthFormData();
   final List<String> errors = [];
-  List<bool> requirementsColors = [false, false, false];
+  List<bool> requirementsColors = [false, false, false, false];
   late FocusNode _checkPasswordFocus;
   late FocusNode _newPasswordFocus;
   bool visibilityOne = true;
@@ -46,7 +46,7 @@ class _SignupFormState extends State<SignupForm> {
 
     if (!isValid) return;
     _formKey.currentState?.save();
-    Navigator.of(context).pop();
+    //Navigator.of(context).pop();
     widget.onSubmit(_formData);
   }
 
@@ -64,7 +64,7 @@ class _SignupFormState extends State<SignupForm> {
           SizedBox(height: getProportionateScreenHeight(25)),
           FormPasswordcheck(requirementColor: requirementsColors),
           SizedBox(height: getProportionateScreenHeight(25)),
-          FormError(errors: errors),
+          FormErrors(errors: errors),
           SizedBox(height: getProportionateScreenHeight(25)),
           ButtonMockUp(
             labelText: 'Continue',
@@ -99,7 +99,7 @@ class _SignupFormState extends State<SignupForm> {
       validator: (value) {
         onValidateEmail(value, errors, setState);
         if (errors.isEmpty) return null;
-        return 'Há algo de errado com seu email';
+        return '';
       },
     );
   }
@@ -135,11 +135,12 @@ class _SignupFormState extends State<SignupForm> {
           }
         },
         onChanged: (password) {
-          final list = validPasswordCreated(password);
+          final list = validPasswordCreated(password, _formData);
           setState(() {
             requirementsColors[0] = list[0];
             requirementsColors[1] = list[1];
             requirementsColors[2] = list[2];
+            requirementsColors[3] = list[3];
           });
           _formData.password = password;
         });
@@ -164,13 +165,17 @@ class _SignupFormState extends State<SignupForm> {
               const Icon(Icons.visibility, color: Constants.kBackgroundColor),
         ),
       ),
-      onChanged: (password) {},
+      onChanged: (password) {
+        final list = validPasswordCreated(password, _formData);
+        setState(() {
+          requirementsColors[3] = list[3];
+        });
+      },
       validator: (password) {
-        final confPassword = password ?? '';
-        if (confPassword == _formData.password) {
+        if (requirementsColors.last == true) {
           return null;
         } else {
-          return 'Senhas não conferem';
+          return '';
         }
       },
     );

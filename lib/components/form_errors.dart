@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/utils/constants.dart';
 import 'package:infoflight/utils/size_config.dart';
 
-class FormError extends StatelessWidget {
-  const FormError({
+class FormErrors extends StatelessWidget {
+  const FormErrors({
     Key? key,
     required this.errors,
   }) : super(key: key);
@@ -43,6 +44,7 @@ class FormPasswordcheck extends StatelessWidget {
     Text('Senha deve ter ao menos 6 caracteres'),
     Text('Letras Maiúsculas e minúsculas'),
     Text('Símbolos'),
+    Text('As senhas devem ser iguais'),
   ];
 
   @override
@@ -100,7 +102,7 @@ bool validItemThreePassword(String password) {
   }
 }
 
-List<bool> validPasswordCreated(String password) {
+List<bool> validPasswordCreated(String password, AuthFormData confirmPassword) {
   final List<bool> validatingPasswordList = [];
 
   validatingPasswordList.add(password.trim().length >= 6 ? true : false);
@@ -108,13 +110,15 @@ List<bool> validPasswordCreated(String password) {
       .add(Constants.regEpxUpperLowerCase.hasMatch(password) ? true : false);
   validatingPasswordList
       .add(Constants.regEpxSymbols.hasMatch(password) ? true : false);
+  validatingPasswordList
+      .add(password == confirmPassword.password ? true : false);
 
   return validatingPasswordList;
 }
 
 void onChangeEmail(
     String text, List<String> errors, void Function(void Function()) estado) {
-  if (text.isNotEmpty && errors.contains(Constants.kEmailNullError)) {
+  if (errors.contains(Constants.kEmailNullError)) {
     estado(() {
       errors.remove(Constants.kEmailNullError);
     });

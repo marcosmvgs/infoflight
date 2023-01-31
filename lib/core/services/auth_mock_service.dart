@@ -10,15 +10,17 @@ class AuthMockService implements AuthService {
   AppUser? get currentUser {
     return _currentUser;
   }
+  @override
+  Map<String, AppUser> get users {
+    return _users;
+  }
 
   static AppUser? _currentUser;
   static MultiStreamController<AppUser?>? _controller;
   static final _userStream = Stream<AppUser?>.multi((controller) {
     _controller = controller;
-    _updateUser(_currentUser);
+    _updateUser(null);
   });
-  
-
 
   @override
   Future<void> login(
@@ -40,11 +42,11 @@ class AuthMockService implements AuthService {
     String password,
   ) async {
     final newUser = AppUser(
-      id: Random().nextDouble().toString(),
-      name: name,
-      email: email,
-    );
- 
+        id: Random().nextDouble().toString(),
+        name: name,
+        email: email,
+        password: password);
+
     _users.putIfAbsent(email, () => newUser);
     _updateUser(newUser);
   }
@@ -57,6 +59,5 @@ class AuthMockService implements AuthService {
   static void _updateUser(AppUser? user) {
     _currentUser = user;
     _controller?.add(_currentUser);
-
   }
 }

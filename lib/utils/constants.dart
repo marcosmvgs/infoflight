@@ -21,11 +21,32 @@ abstract class Constants {
 
   static final RegExp regExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z]+");
   static final RegExp regEpxUpperLowerCase = RegExp(r"(?=.*[a-z])(?=.*[A-Z])");
-  static final RegExp regEpxSymbols = RegExp(r"[^a-z0-9]", caseSensitive: false);
-  
+  static final RegExp regEpxSymbols =
+      RegExp(r"[^a-z0-9]", caseSensitive: false);
 
   static const String kEmailNullError = 'Por favor, insira seu email.';
   static const String kInvalidEmailError = 'Por favor, insira um email válido.';
   static const String kPassNullError = 'Por favor, insira sua senha.';
   static const String kMatchPassError = 'As senhas não conferem.';
+
+  static const List<Map<String, String>> KsplashData = [
+    {
+      'text':
+          'Seja Bem vindo.\n\nAqui você vai adquirir e compartilhar experiências na Aviação!',
+      'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg'
+    },
+    {
+      'text': 'Faça consultas de meteorologia para planejar seu voo...',
+      'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg',
+    },
+    {
+      'text': 'Registre suas horas de voo diretamente na CIV - Digital',
+      'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg'
+    },
+    {
+      'text':
+          'Encontre seus amigos aviadores e compartilhe suas experiências...',
+      'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg'
+    },
+  ];
 }

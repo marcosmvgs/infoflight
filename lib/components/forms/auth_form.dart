@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/button_mockup.dart';
-import 'package:infoflight/components/form_error.dart';
+import 'package:infoflight/components/form_errors.dart';
 import 'package:infoflight/components/social_card.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/utils/app_routes.dart';
@@ -21,7 +21,7 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-  final _formData = AuthFormData();
+  final AuthFormData _formData = AuthFormData();
   final List<String> errors = [];
   bool remember = false;
   bool isObscured = true;
@@ -46,7 +46,7 @@ class _AuthFormState extends State<AuthForm> {
     // Formulário está válido?
     if (!isValid) return;
     // Se sim, pode salvar, executar onsaved de todos textformfields
-    _formKey.currentState!.save();
+    _formKey.currentState?.save();
 
     // Agora que já atribui os valores no _formData pode chamar a função onSubmit para
     // passar o _formData para o widget AuthScreen.
@@ -76,10 +76,10 @@ class _AuthFormState extends State<AuthForm> {
             ],
           ),
           SizedBox(height: getProportionateScreenHeight(20)),
-          FormError(errors: errors),
+          FormErrors(errors: errors),
           SizedBox(height: getProportionateScreenHeight(10)),
           ButtonMockUp(
-            labelText: _formData.isLogin ? 'Entrar' : 'Cadastrar',
+            labelText: 'Entrar',
             onPressed: _submit,
             backColor: Constants.KHighLightColor,
           ),
@@ -132,7 +132,7 @@ class _AuthFormState extends State<AuthForm> {
     return TextFormField(
       focusNode: emailFocusNode,
       obscureText: isObscured,
-      onSaved: (newValue) => _formData.email = newValue!,
+      onSaved: (newValue) => _formData.password = newValue!,
       decoration: InputDecoration(
         hintText: 'Senha',
         prefixIcon: const Icon(
@@ -151,20 +151,11 @@ class _AuthFormState extends State<AuthForm> {
           ),
         ),
       ),
-      onChanged: (value) {
-        onChangeEmail(value, errors, setState);
-      },
-      validator: (value) {
-        onValidateEmail(value, errors, setState);
-        if (errors.isEmpty) return null;
-        return 'A senha não passou em algum critério.';
-      },
     );
   }
 
   TextFormField _buildEmailAuthForm() {
     return TextFormField(
-      autofocus: true,
       onEditingComplete: () {
         emailFocusNode.requestFocus();
       },
@@ -177,8 +168,8 @@ class _AuthFormState extends State<AuthForm> {
       },
       validator: (value) {
         onValidateEmail(value, errors, setState);
-        if (errors.isNotEmpty) return null;
-        return 'Há algo de errado com seu email';
+        if (errors.isEmpty) return null;
+        return '';
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:infoflight/core/models/app_user.dart';
 import 'package:infoflight/core/services/auth_mock_service.dart';
 
 abstract class AuthService {
+  Map<String, AppUser> get users;
   AppUser? get currentUser;
   Stream<AppUser?> get userChanges;
 

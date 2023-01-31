@@ -10,7 +10,6 @@ import '../../utils/size_config.dart';
 class AuthOrApp extends StatelessWidget {
   const AuthOrApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -21,6 +20,8 @@ class AuthOrApp extends StatelessWidget {
           return const LoadingScreen();
         } else {
           return snapshot.hasData ? const HomepageScreen() : const AuthScreen();
+          
+          
         }
       },
     );

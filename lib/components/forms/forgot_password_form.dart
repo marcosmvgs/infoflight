@@ -3,7 +3,7 @@ import '../../core/models/auth_form_data.dart';
 import '../../utils/constants.dart';
 import '../../utils/size_config.dart';
 import '../button_mockup.dart';
-import '../form_error.dart';
+import '../form_errors.dart';
 import '../no_account_text.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
@@ -26,7 +26,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         children: [
           _buildEmailForgetPasswordForm(),
           SizedBox(height: getProportionateScreenHeight(10)),
-          FormError(errors: errors),
+          FormErrors(errors: errors),
           SizedBox(height: getProportionateScreenHeight(10)),
           ButtonMockUp(
             labelText: 'Continue',

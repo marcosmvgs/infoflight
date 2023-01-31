@@ -17,17 +17,18 @@ class _SignupBodyState extends State<SignupBody> {
 
   Future<void> _handleSubmit(AuthFormData formData) async {
     try {
+      if (!mounted) return;
       setState(() => _isLoading = true);
       await AuthService().signup(
         'Marcos',
         formData.email,
         formData.password,
       );
-      print('deu bom');
     } catch (error) {
-      // tratar erro
+      rethrow;
     } finally {
       setState(() => _isLoading = false);
+      Navigator.of(context).pop();
     }
   }
 
@@ -43,8 +44,7 @@ class _SignupBodyState extends State<SignupBody> {
         ),
         child: Column(
           children: [
-            if(_isLoading)
-            const CircularProgressIndicator(),
+            if (_isLoading) const CircularProgressIndicator(),
             const Text(
               'Registrar conta',
               style: TextStyle(

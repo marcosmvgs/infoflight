@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/app_drawer.dart';
-import 'package:infoflight/core/models/airfield.dart';
 import 'package:infoflight/core/models/airfields_list.dart';
 import 'package:infoflight/core/services/auth_service.dart';
 import 'package:infoflight/utils/constants.dart';
@@ -15,15 +14,13 @@ class HomepageScreen extends StatefulWidget {
 
 class _HomepageScreenState extends State<HomepageScreen> {
   late Future<void> _loadAirfieldsList;
-  late List<Airfield> _airfieldsList;
 
   @override
   void initState() {
     super.initState();
-  
-      _loadAirfieldsList =
-          Provider.of<AirfieldsList>(context, listen: false).loadAirfields();
-  
+
+    _loadAirfieldsList =
+        Provider.of<AirfieldsList>(context, listen: false).loadAirfields();
   }
 
   @override

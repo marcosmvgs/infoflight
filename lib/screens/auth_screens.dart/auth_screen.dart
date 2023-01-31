@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infoflight/components/forms/auth_form.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/core/services/auth_service.dart';
+import 'package:infoflight/utils/app_routes.dart';
 import 'package:infoflight/utils/constants.dart';
 import '../../utils/size_config.dart';
 
@@ -17,19 +18,34 @@ class _AuthScreenState extends State<AuthScreen> {
     try {
       if (!mounted) return;
       setState(() {});
-      if (formData.isLogin) {
-        await AuthService().login(
-          formData.email,
-          formData.password,
-        );
-      } else {
-        await AuthService().signup(
-          formData.name,
-          formData.email,
-          formData.password,
-        );
+      final usersMap = AuthService().users;
+      if (usersMap[formData.email] == null) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  content: const Text('Email não está cadastrado'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pushNamed(AppRoutes.SIGNUP);
+                        },
+                        child: const Text('Cadastre-se')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Fechar'))
+                  ],
+                ));
       }
+
+      await AuthService().login(
+        formData.email,
+        formData.password,
+      );
     } catch (error) {
+      error.toString();
       // Tratar erro
     } finally {}
   }
@@ -40,7 +56,6 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
-          alignment: Alignment.center,
           children: [
             Positioned(
               bottom: 80,
