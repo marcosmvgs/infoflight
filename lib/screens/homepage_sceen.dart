@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:infoflight/components/app_drawer.dart';
+import 'package:infoflight/core/models/airfield.dart';
 import 'package:infoflight/core/models/airfields_list.dart';
-import 'package:infoflight/utils/app_routes.dart';
+import 'package:infoflight/core/services/auth_service.dart';
+import 'package:infoflight/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class HomepageScreen extends StatefulWidget {
@@ -12,13 +14,16 @@ class HomepageScreen extends StatefulWidget {
 }
 
 class _HomepageScreenState extends State<HomepageScreen> {
-  late Future<void> _airfieldsList;
+  late Future<void> _loadAirfieldsList;
+  late List<Airfield> _airfieldsList;
 
   @override
   void initState() {
     super.initState();
-    _airfieldsList =
-        Provider.of<AirfieldsList>(context, listen: false).loadAirfields();
+  
+      _loadAirfieldsList =
+          Provider.of<AirfieldsList>(context, listen: false).loadAirfields();
+  
   }
 
   @override
@@ -29,7 +34,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
           actions: [
             GestureDetector(
               onTap: (() {
-                Navigator.of(context).pushNamed(AppRoutes.PROFILE_SETTINGS);
+                AuthService().logout();
               }),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
@@ -46,13 +51,13 @@ class _HomepageScreenState extends State<HomepageScreen> {
         ),
         drawer: const AppDrawer(),
         body: FutureBuilder(
-          future: _airfieldsList,
+          future: _loadAirfieldsList,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return Center(
-                child: Text('Lista de aeródromos carregada com sucesso',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline4,),
+              return const Center(
+                child: Text('Seja bem vindo!',
+                    textAlign: TextAlign.center,
+                    style: Constants.kTextStyleNeutral),
               );
             } else {
               return const Center(

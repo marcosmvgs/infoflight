@@ -17,6 +17,8 @@ class AuthMockService implements AuthService {
     _controller = controller;
     _updateUser(_currentUser);
   });
+  
+
 
   @override
   Future<void> login(
@@ -42,7 +44,7 @@ class AuthMockService implements AuthService {
       name: name,
       email: email,
     );
-
+ 
     _users.putIfAbsent(email, () => newUser);
     _updateUser(newUser);
   }
@@ -55,5 +57,6 @@ class AuthMockService implements AuthService {
   static void _updateUser(AppUser? user) {
     _currentUser = user;
     _controller?.add(_currentUser);
+
   }
 }

@@ -35,38 +35,21 @@ class FormError extends StatelessWidget {
   }
 }
 
-void getEmailErrorString(String? oldValue,
-    void Function(void Function()) setarEstado, List<String> errors) {
-  final newValue = oldValue ?? '';
-  if (newValue.isEmpty && !errors.contains(Constants.kEmailNullError)) {
-    setarEstado(() {
-      errors.add(Constants.kEmailNullError);
-    });
-  } else if (!Constants.regExp.hasMatch(newValue) &&
-      !errors.contains(Constants.kInvalidEmailError)) {
-    setarEstado(() {
-      errors.add(Constants.kInvalidEmailError);
-    });
-  } else {
-    return;
-  }
-}
-
 class FormPasswordcheck extends StatelessWidget {
   final List<bool> requirementColor;
   const FormPasswordcheck({super.key, required this.requirementColor});
 
   final List<Text> requirements = const [
-    Text('Pelo menos 6 caracteres'),
+    Text('Senha deve ter ao menos 6 caracteres'),
     Text('Letras Maiúsculas e minúsculas'),
-    Text('Símbolos')
+    Text('Símbolos'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
         children: List.generate(
-            3,
+            requirements.length,
             (index) => formRequirementText(
                   requirement: requirements[index],
                   color: requirementColor[index],
@@ -80,11 +63,80 @@ class FormPasswordcheck extends StatelessWidget {
     return Row(
       children: [
         color
-            ? const Icon(Icons.check, color: Colors.green)
-            : const Icon(Icons.error, color: Colors.red),
+            ? Icon(
+                Icons.check,
+                color: Colors.green.shade700,
+                size: 18,
+              )
+            : Icon(Icons.error_outline, color: Colors.red.shade700, size: 18),
         SizedBox(width: getProportionateScreenWidth(10)),
         requirement,
       ],
     );
+  }
+}
+
+bool validItemOnePassword(String password) {
+  if (password.trim().length >= 6) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool validItemTwoPassword(String password) {
+  if (Constants.regEpxUpperLowerCase.hasMatch(password)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool validItemThreePassword(String password) {
+  if (Constants.regEpxSymbols.hasMatch(password)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+List<bool> validPasswordCreated(String password) {
+  final List<bool> validatingPasswordList = [];
+
+  validatingPasswordList.add(password.trim().length >= 6 ? true : false);
+  validatingPasswordList
+      .add(Constants.regEpxUpperLowerCase.hasMatch(password) ? true : false);
+  validatingPasswordList
+      .add(Constants.regEpxSymbols.hasMatch(password) ? true : false);
+
+  return validatingPasswordList;
+}
+
+void onChangeEmail(
+    String text, List<String> errors, void Function(void Function()) estado) {
+  if (text.isNotEmpty && errors.contains(Constants.kEmailNullError)) {
+    estado(() {
+      errors.remove(Constants.kEmailNullError);
+    });
+  } else if (Constants.regExp.hasMatch(text) &&
+      errors.contains(Constants.kInvalidEmailError)) {
+    estado(() {
+      errors.remove(Constants.kInvalidEmailError);
+    });
+  }
+}
+
+void onValidateEmail(
+    String? text, List<String> errors, void Function(void Function()) estado) {
+  if (text == null) return;
+  if (text.isEmpty && !errors.contains(Constants.kEmailNullError)) {
+    estado(() {
+      errors.add(Constants.kEmailNullError);
+    });
+  } else if (!Constants.regExp.hasMatch(text) &&
+      !errors.contains(Constants.kInvalidEmailError)) {
+    estado(() {
+      errors.add(Constants.kInvalidEmailError);
+    });
   }
 }

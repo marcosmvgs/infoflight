@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:infoflight/components/button_mockup.dart';
-import 'package:infoflight/components/form_error.dart';
-import 'package:infoflight/components/no_account_text.dart';
-import 'package:infoflight/components/rounded_input_email_field.dart';
-import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/utils/constants.dart';
 import 'package:infoflight/utils/size_config.dart';
+import 'forms/forgot_password_form.dart';
 
 class ForgotPasswordBody extends StatelessWidget {
   const ForgotPasswordBody({super.key});
@@ -41,62 +37,3 @@ class ForgotPasswordBody extends StatelessWidget {
   }
 }
 
-class ForgotPasswordForm extends StatefulWidget {
-  const ForgotPasswordForm({super.key});
-
-  @override
-  State<ForgotPasswordForm> createState() => _ForgotPasswordFormState();
-}
-
-class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
-  List<String> errors = [];
-  final _formData = AuthFormData();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          RoundedInputEmailField(
-            onSaved: (validEmail) => _formData.email = validEmail!,
-            size: size,
-            hintText: 'Seu email',
-            onChanged: (value) {
-              if (value.isNotEmpty &&
-                  errors.contains(Constants.kEmailNullError)) {
-                setState(() {
-                  errors.remove(Constants.kEmailNullError);
-                });
-              } else if (Constants.regExp.hasMatch(value) &&
-                  errors.contains(Constants.kInvalidEmailError)) {
-                setState(() {
-                  errors.remove(Constants.kInvalidEmailError);
-                });
-              }
-            },
-            validator: (value) {
-              getEmailErrorString(value, setState, errors);
-            },
-          ),
-          SizedBox(height: getProportionateScreenHeight(10)),
-          FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(10)),
-          ButtonMockUp(
-            labelText: 'Continue',
-            onPressed: () {
-              _formKey.currentState?.validate();
-            },
-            backColor: Constants.KHighLightColor,
-          ),
-          SizedBox(height: SizeConfig.screenHeight! * 0.02),
-          const NoAccountText(),
-          SizedBox(height: getProportionateScreenHeight(40))
-        ],
-      ),
-    );
-  }
-}

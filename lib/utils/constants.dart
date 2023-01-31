@@ -21,6 +21,8 @@ abstract class Constants {
 
   static final RegExp regExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+.[a-zA-Z]+");
   static final RegExp regEpxUpperLowerCase = RegExp(r"(?=.*[a-z])(?=.*[A-Z])");
+  static final RegExp regEpxSymbols = RegExp(r"[^a-z0-9]", caseSensitive: false);
+  
 
   static const String kEmailNullError = 'Por favor, insira seu email.';
   static const String kInvalidEmailError = 'Por favor, insira um email válido.';

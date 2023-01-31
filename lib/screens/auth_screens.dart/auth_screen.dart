@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infoflight/components/auth_form.dart';
+import 'package:infoflight/components/forms/auth_form.dart';
 import 'package:infoflight/core/models/auth_form_data.dart';
 import 'package:infoflight/core/services/auth_service.dart';
 import 'package:infoflight/utils/constants.dart';
@@ -38,15 +38,10 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 32, 32, 32),
       body: SingleChildScrollView(
         child: Stack(
           alignment: Alignment.center,
           children: [
-            SizedBox(
-              width: size.width,
-              height: size.height,
-            ),
             Positioned(
               bottom: 80,
               child: SizedBox(
@@ -90,7 +85,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         style: Constants.kTextStyleNeutral,
                       ),
                     ),
-                    AuthForm(size: size, onSubmit: _handleSubmit)
+                    AuthForm(onSubmit: _handleSubmit)
                   ],
                 ),
               ),

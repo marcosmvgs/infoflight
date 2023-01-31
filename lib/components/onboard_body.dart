@@ -21,6 +21,7 @@ class _OnboardBodyState extends State<OnboardBody> {
       'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg'
     },
     {
+
       'text': 'Faça consultas de meteorologia para planejar seu voo...',
       'image': 'assets/images/john-mcarthur-8KLLgqHMAv4-unsplash.jpg',
     },
@@ -39,33 +40,34 @@ class _OnboardBodyState extends State<OnboardBody> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-        child: SizedBox(
-      height: size.height,
-      width: size.width,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
+        child: SingleChildScrollView(
+          child: Stack(
+              alignment: Alignment.center,
+              children: [
           Positioned(
             height: size.height,
+            width: size.width,
             child: Image.asset(
               "assets/images/clay-banks-O5hfuVWgsS8-unsplash.jpg",
+              fit: BoxFit.cover,
             ),
           ),
-          
-          const Positioned(
-            top: 50,
-            child: Text(
-              "infoFlight",
-              style: TextStyle(
-                fontFamily: 'Oswald',
-                color: Constants.KHighLightColor,
-                fontSize: 70,
-              ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20),
+              vertical: getProportionateScreenHeight(20)
             ),
-          ),
-          Positioned(
-            top: 170,
-            child: Container(
+            width: size.width,
+            height: size.height,
+            child: Column(
+              children: [
+               const Text('InfoFlight',
+                style: TextStyle(
+               fontFamily: 'Oswald',
+               color: Constants.KHighLightColor,
+               fontSize: 70,
+                         )),
+              Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 20,
@@ -85,39 +87,28 @@ class _OnboardBodyState extends State<OnboardBody> {
                       index: index,
                     );
                   }),
-            ),
-          ),
-          Positioned(
-            top: 400,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Row(
+                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       splashData.length,
                       (index) => buildDot(context, index: index),
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(230)),
-                  SizedBox(
-                      width: size.width * 0.9,
-                      height: 50,
-                      child: ButtonMockUp(
-                        labelText: 'Entrar',
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.AUTH_OR_APP);
-                        },
-                        backColor: Constants.KHighLightColor,
-                      )),
-                ],
-              ),
+                  SizedBox(height: getProportionateScreenWidth(300)),
+                  ButtonMockUp(
+                    labelText: 'Entrar',
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AppRoutes.AUTH_OR_APP);
+                    },
+                    backColor: Constants.KHighLightColor,
+                  ),
+              ],
             ),
-          )
-        ],
-      ),
-    ));
+          ),
+              ],
+            ),
+        ));
   }
 
   AnimatedContainer buildDot(BuildContext context, {required int index}) {
